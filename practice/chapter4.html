@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // default 값 설정 가능(javascript 기능)
+    function Btn({ text, changeValue, fontSize = 16 }) {
+        return <button
+            onClick={changeValue}
+            style={{
+                backgroundColor: "tomato",
+                color: "white",
+                padding: "10px 20px",
+                border: 0,
+                borderRadius: 10,
+                fontSize
+            }}
+        >
+            {text}</button>
+    }
+    // memo : 변경사항이 없으면 다시 그리지 않아도된다고 기억하는 것
+    const MemorizedBtn = React.memo(Btn)
+
+    // props의 타입 지정
+    // props이름: PropTypes.자료형.(option) -> isRequired는 필수요소
+    MemorizedBtn.propTypes = {
+        text: PropTypes.string.isRequired,
+        fontSize: PropTypes.number,
+    }
+    function App() {
+        const [value, setValue] = React.useState("Save Changes")
+        const changeValue = () => setValue("Revert Changes")
+
+        return (
+            <div>
+                <MemorizedBtn text={value} changeValue={changeValue} fontSize={18} />
+                <MemorizedBtn text="hello" />
+            </div>
+        );
+    }
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);  
+</script>
+
+</html>

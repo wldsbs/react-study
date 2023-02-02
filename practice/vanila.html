@@ -1,0 +1,24 @@
+<!-- 버튼을 몇 번 클릭 했는지 확인할 수 잇는 -->
+<!DOCTYPE html>
+<html>
+    <body>
+        <!-- 1. html 생성 -->
+        <span>Total clicks: 0</span>
+        <button id="btn">Click me</button>
+    </body>
+    <script>
+        let counter = 0;
+        // 2. javascript에 가져오기
+        const button = document.getElementById("btn");
+        const span = document.querySelector("span")
+        // 4. function 생성하기 -> 이벤트 발생시 뭐할건지
+        function handleClick() {
+            // 데이터 업데이트
+            counter = counter + 1;
+            // html 업데이트
+            span.innerText = `Total clikcks: ${counter}`;
+        }
+        // 3. button 클릭 이벤트 생성
+        button.addEventListener("click", handleClick);
+    </script>  
+</html>

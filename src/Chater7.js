@@ -5,12 +5,12 @@ function Chapter7() {
   const [todos, setTodos] = useState([]);
   const onChange = (event) => setTodo(event.target.value);
   const onSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //submit 해도 새로고침하지 않도록
     if (todo === "") return;
+    // setTodos((currentArray) => [todo, ...currentArray]); //나중에 추가한 순서대로
+    setTodos((currentArray) => [...currentArray, todo]); //먼저 추가한 순서대로
     setTodo("");
-    setTodos((currentArray) => [todo, ...currentArray]);
   };
-  console.log(todos);
   return (
     <div>
       <h1>My Todos ({todos.length})</h1>
@@ -23,6 +23,12 @@ function Chapter7() {
         />
         <button>Add To Do</button>
       </form>
+      <hr />
+      <ul>
+        {todos.map((todo, index) => (
+          <li key={index}>{todo}</li>
+        ))}
+      </ul>
     </div>
   );
 }
